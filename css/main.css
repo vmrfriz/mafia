@@ -1,0 +1,391 @@
+@font-face {
+	font-family: Lobster;
+	src: url(../fonts/Lobster-Regular.ttf);
+}
+
+@font-face {
+	font-family: OpenSans;
+	src: url(../fonts/OpenSans-Regular.ttf),
+		url(../fonts/OpenSans-Light.ttf),
+		url(../fonts/OpenSans-Bold.ttf);
+}
+
+@font-face {
+	font-family: Roboto;
+	src: url(../fonts/Roboto-Light.ttf),
+		url(../fonts/Roboto-Thin.ttf);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	background-color: #eee;
+	font: 100 18px/1.4em Roboto, sans-serif;
+}
+
+#page-shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,.5);
+	z-index: 9;
+	cursor: pointer;
+}
+
+#page-wrapper {
+	height: 100vh;
+}
+
+main {
+}
+
+#page-wrapper.blur {
+	filter: blur(2px);
+}
+
+/**************************
+*		Правая шторка
+**************************/
+.players-list {
+	width: 400px;
+	max-width: 80%;
+	height: 100vh;
+	overflow-x: auto;
+	position: absolute;
+	top: 0;
+	right: -400px;
+	background-color: #7af;
+	z-index: 10;
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	box-shadow: -1px 0 3px rgba(0,0,0,0.12), -1px 0 2px rgba(0,0,0,0.24);
+	padding: 1%;
+}
+.players-list .shadow {
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 2;
+	background-color: rgba(0,0,0,.4);
+}
+	.players-list .player {
+		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+		cursor: pointer;
+		padding: 2% 4%;
+		display: flex;
+		flex-flow: row nowrap;
+		background-color: #eee;
+		margin-top: 4%;
+		border-radius: 4px;
+	}
+	.players-list .player:hover {
+		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+		.players-list .player .id {
+			display: inline-block;
+			width: 10%;
+		}
+		.players-list .player .id:not(:empty):after {
+			content: ".";
+		}
+		.players-list .player .nickname {
+			display: inline-block;
+			max-width: 40%;
+			text-overflow: ellipsis;
+		}
+		.players-list .player .name {
+			display: inline;
+			max-width: 40%;
+			color: #777;
+			padding-left: 2%;
+			font-size: .8em;
+		}
+			.players-list .player .name:before { content: "("; }
+			.players-list .player .name:after { content: ")"; }
+	.players-list .player.selected {
+		position: relative;
+		z-index: 3;
+		border-radius: 4px 4px 0 0;
+		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+	.players-list .player.disabled:hover {
+		cursor: not-allowed;
+		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	}
+	.players-list #context {
+		position: absolute;
+		z-index: 4;
+		top: 0;
+		left: 5%;
+		right: 5%;
+		background-color: #ddd;
+		border-radius: 0 0 4px 4px;
+		text-align: center;
+		margin-top: 1px;
+		font-size: 14px;
+		overflow: hidden;
+		display: none;
+/*		transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22), inset 0 2px 3px rgba(0,0,0,.12);
+	}
+
+		.players-list #context .menu-item {
+			padding: 3px 0;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			cursor: pointer;
+		}
+
+		.players-list #context .menu-item:hover {
+			background-color: #ccc;
+		}
+
+		.players-list #context .menu-item.delete:hover {
+			background-color: #c44;
+			color: #fff;
+	}
+
+/**************************
+*			Шапка
+**************************/
+header {
+	margin: 0;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	position: relative;
+	height: 33%;
+	background: url(../images/header-bg.jpg) center center no-repeat;
+	background-size: cover;
+/*	max-height: 33%;*/
+}
+	header:before {
+		content: " ";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0,0,0,.4);
+		z-index: 1;
+	}
+	header [class|="header-bg"] {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 0;
+/*		transition: all 0.3s cubic-bezier(.25,.8,.25,1);*/
+		transition: all .3s linear;
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		filter: blur(2px);
+		z-index: .99;
+	}
+	header .header-bg-die {
+		background-image: url(../images/header-bg-die.jpg);
+	}
+	header .header-bg-talk {
+		background-image: url(../images/header-bg-talk-1.jpg);
+	}
+	header .header-bg-vote {
+		background-image: url(../images/header-bg-vote.jpg);
+	}
+	header .header-bg-mafia {
+		background-image: url(../images/header-bg-mafia.jpg);
+	}
+	header .header-bg-police {
+		background-image: url(../images/header-bg-police.jpg);
+	}
+	header .header-bg-killer {
+		background-image: url(../images/header-bg-killer-1.jpg);
+	}
+	header .header-bg-whore {
+		background-image: url(../images/header-bg-whore.jpg);
+	}
+	header .header-bg-doctor {
+		background-image: url(../images/header-bg-doctor.jpg);
+	}
+	header .title {
+		display: block;
+		position: relative;
+		text-shadow: 0 0 3px black;
+		font-family: Lobster, sans-serif;
+		color: #fff;
+		font-weight: bold;
+		height: 40px;
+		font-size: 50px;
+		padding-left: 5vw;
+		z-index: 1;
+	}
+	header .description {
+		font-family: OpenSans, sans-serif;
+		font-weight: bold;
+		position: relative;
+		display: block;
+		color: #ccc;
+		text-shadow: 0 0 3px black;
+		font-size: 20px;
+		padding-left: 5vw;
+		z-index: 1;
+	}
+	header #players-list {
+		box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+		transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+		border-radius: 100%;
+		border: none;
+		width: 80px;
+		height: 80px;
+		background: #59f url(../images/players-list-white.png) center center no-repeat;
+		background-size: 50%;
+		position: absolute;
+		z-index: 2;
+		bottom: -40px;
+		right: 10vw;
+		cursor: pointer;
+	}
+	header #players-list:hover {
+		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+	header #players-list.invisible {
+		transform: scale(0);
+	}
+
+
+/**************************
+*		Рабочая область
+**************************/
+main {
+	height: calc(67% - 80px);
+}
+
+/**************************
+*	Полоса: Этап игры
+**************************/
+.sequence {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	align-content: stretch;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 80px;
+/*		background-color: #59f;*/
+/*		background-color: #ddd;*/
+	padding: 10px;
+/*		box-shadow: 0 -1px 3px rgba(0,0,0,0.12), 0 -1px 2px rgba(0,0,0,0.24);*/
+}
+	.sequence .step {
+		position: relative;
+		height: 60px;
+		width: 100%;
+		text-align: center;
+		color: #999;
+		font-family: Lobster, sans-serif;
+		background-color: #ccc;
+		border-radius: 5px;
+		padding-left: 29px;
+		line-height: 60px;
+		font-size: 26px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		cursor: pointer;
+	}
+	.sequence .step:not(:last-of-type) {
+		border-top-right-radius: 9px;
+		border-bottom-right-radius: 9px;
+	}
+	.sequence .step:after,
+	.sequence .step:before {
+		content: " ";
+		position: absolute;
+		border: 30px solid transparent;
+		top: 0;
+		bottom: 0;
+		z-index: 2;
+	}
+	.sequence .step:before {
+		right: -58px;
+		border-left: 29px solid #ddd;
+	}
+	.sequence .step:after {
+		right: -53px;
+		border-left: 29px solid #ccc;
+	}
+	.sequence .step:last-of-type:after,
+	.sequence .step:last-of-type:before {
+		content: none;
+	}
+	.sequence .step.done:after {
+		right: -53px;
+		border-left: 29px solid #bbb;
+	}
+	.sequence .step.done {
+		color: #555;
+		background-color: #bbb;
+	}
+	.sequence .step.active {
+		color: #049;
+		background-color: #7af;
+	}
+	.sequence .step.active:after {
+		border-left-color: #7af;
+	}
+
+/**************************
+*	Универсальные классы
+**************************/
+button#add-player {
+	color: #59f;
+	background-color: #fff;
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 10;
+}
+
+button#add-player:hover {
+	color: #48e;
+}
+
+.nodisplay {
+	display: none
+}
+
+button.add {
+	width: 70px;
+	height: 70px;
+	padding: 0;
+	font-family: Roboto, sans-serif;
+	border-radius: 100%;
+	border: 0;
+	color: #fff;
+	font-size: 50px;
+	cursor: pointer;
+	background-color: #59f;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+button.add:hover {
+	color: #eee;
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+button.add.invisible {
+	transform: scale(0);
+}

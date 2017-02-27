@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Мафия</title>
+	<link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+	<div id="page-shadow" class="nodisplay"></div>
+	<div class="players-list">
+		<div class="shadow nodisplay"></div>
+		<div id="context">
+			<div id="menu-item-1" class="menu-item">Игровой номер</div>
+			<div id="menu-item-2" class="menu-item">Исключить</div>
+			<div id="menu-item-3" class="menu-item">Изменить</div>
+			<div id="menu-item-4" class="menu-item delete">Удалить</div>
+		</div>
+		<!--div class="player" data-id="0">
+			<div class="id">1</div>
+			<div class="nickname">Смит</div>
+			<div class="name">Валерий</div>
+		</div>
+		<div class="player" data-id="1">
+			<div class="id">2</div>
+			<div class="nickname">Сникерс</div>
+			<div class="name">Артём</div>
+		</div>
+		<div class="player" data-id="2">
+			<div class="id">3</div>
+			<div class="nickname">Старпёр</div>
+			<div class="name">Жанна</div>
+		</div>
+		<div class="player" data-id="3">
+			<div class="id">4</div>
+			<div class="nickname">Уфимка</div>
+			<div class="name">Анастасия</div>
+		</div>
+		<div class="player" data-id="4">
+			<div class="id">5</div>
+			<div class="nickname">Крестный</div>
+			<div class="name">Ян</div>
+		</div>
+		<div class="player" data-id="5">
+			<div class="id">6</div>
+			<div class="nickname">ЛедиБаг</div>
+			<div class="name">Наиля</div>
+		</div-->
+		<button id="add-player" class="add invisible">+</button>
+	</div>
+	<div id="page-wrapper">
+		<header>
+			<div class="header-bg-die"></div>
+			<div class="header-bg-talk"></div>
+			<div class="header-bg-vote"></div>
+			<div class="header-bg-mafia"></div>
+			<div class="header-bg-police"></div>
+			<div class="header-bg-killer"></div>
+			<div class="header-bg-whore"></div>
+			<div class="header-bg-doctor"></div>
+			<div class="title">Мафия</div>
+			<div class="description">Командная психологическая пошаговая ролевая игра с детективным сюжетом</div>
+			<button id="players-list" class="invisible"></button>
+		</header>
+		<main>
+			test
+		</main>
+		<div class="sequence">
+			<div id="die" class="step done">Последнее слово</div>
+			<div id="talk" class="step done">Обсуждение</div>
+			<div id="vote" class="step active">Голосование</div>
+			<div id="mafia" class="step">Мафия</div>
+			<div id="police" class="step">Комиссар</div>
+			<div id="killer" class="step">Маньяк</div>
+			<div id="whore" class="step">Любовница</div>
+			<div id="doctor" class="step">Доктор</div>
+		</div>
+	</div>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/js.cookie.js"></script>
+	<script src="js/source.js"></script>
+</body>
+</html>
