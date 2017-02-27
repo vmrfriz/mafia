@@ -51,6 +51,12 @@ $(function(){
 	$(".sequence .step").click(function(){
 		headerChange( $(this).attr("id") );
 	});
+    
+    // Добавление пользователя
+    $("#add-player").click(function(){
+        $(this).addClass("invisible");
+        showAddPlayer();
+    });
 });
 
 /***************************
@@ -61,7 +67,7 @@ $(function(){
 function showRightBar() {
 	$(this).addClass("invisible");
 	$("#page-shadow").removeClass("nodisplay");
-	$(".players-list").css("right", 0);
+	$(".right-bar").css("right", 0);
 	$("#page-wrapper").addClass("blur");
 	$("button#add-player").removeClass("invisible");
 }
@@ -70,7 +76,7 @@ function showRightBar() {
 function hideRightBar() {
 	$("#page-shadow").addClass("nodisplay");
 	$("button#add-player").addClass("invisible");
-	$(".players-list").removeAttr("style");
+	$(".right-bar").removeAttr("style");
 	$("#players-list").removeClass("invisible");
 	$("#page-wrapper").removeClass("blur");
 }
@@ -83,7 +89,7 @@ function showPlayerContext(id) {
 			target.addClass("selected");
 			$(".players-list .shadow").removeClass("nodisplay");
 			$("#context")
-				.css("top", target.outerHeight() + target.offset().top - 1)
+				.css("top", target.outerHeight() + target.offset().top)
 				.fadeIn(300);
 		}
 	});
@@ -119,6 +125,13 @@ function addPlayerHTML(id, playerObj) {
 		<div class="nickname">'+ playerObj["nickname"] +'</div>\
 		<div class="name">'+ playerObj["name"] +'</div>\
 	</div>');
+}
+
+// Развернуть блок добавления игрока
+function showAddPlayer() {
+    $(".players-add")
+    .removeClass("nodisplay")
+    .addClass("show");
 }
 
 // Удаление игрока
